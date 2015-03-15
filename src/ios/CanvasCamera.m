@@ -508,40 +508,40 @@ typedef enum {
      ];
 }
 
-- (void) removeFileAtPath:(CDVInvokedUrlCommand *)command {
-    
-    CDVPluginResult *pluginResult = nil;
-    NSString *resultJS = nil;
-    
-    if ([command.arguments count] > 0) {
-        
-        NSString *filePath = [command.arguments objectAtIndex:0];
-        
-        NSError *error;
-        
-        [[NSFileManager defaultManager]removeItemAtPath:filePath error:&error];
-        
-        if (!error) {
-            
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
-            resultJS = [pluginResult toSuccessCallbackString:command.callbackId];
-            [self writeJavascript:resultJS];
-        }
-        else {
-            
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
-            resultJS = [pluginResult toErrorCallbackString:command.callbackId];
-            [self writeJavascript:resultJS];
-        }
-    }
-    else {
-        
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Must pass in the file path parameter"];
-        resultJS = [pluginResult toErrorCallbackString:command.callbackId];
-        [self writeJavascript:resultJS];
-
-    }
-}
+// - (void) removeFileAtPath:(CDVInvokedUrlCommand *)command {
+//
+//     CDVPluginResult *pluginResult = nil;
+//     NSString *resultJS = nil;
+//
+//     if ([command.arguments count] > 0) {
+//
+//         NSString *filePath = [command.arguments objectAtIndex:0];
+//
+//         NSError *error;
+//
+//         [[NSFileManager defaultManager]removeItemAtPath:filePath error:&error];
+//
+//         if (!error) {
+//
+//             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
+//             resultJS = [pluginResult toSuccessCallbackString:command.callbackId];
+//             [self writeJavascript:resultJS];
+//         }
+//         else {
+//
+//             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+//             resultJS = [pluginResult toErrorCallbackString:command.callbackId];
+//             [self writeJavascript:resultJS];
+//         }
+//     }
+//     else {
+//
+//         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Must pass in the file path parameter"];
+//         resultJS = [pluginResult toErrorCallbackString:command.callbackId];
+//         [self writeJavascript:resultJS];
+//
+//     }
+// }
 
 
 #pragma mark - capture delegate
