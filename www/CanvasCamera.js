@@ -111,8 +111,8 @@ cordova.define("cordova/plugin/CanvasCamera", function(require, exports, module)
         this._height = windowHeight;
     };
 
-    CanvasCamera.prototype.takePicture = function(onsuccess) {
-        cordova.exec(onsuccess, function(){}, "CanvasCamera", "captureImage", []);
+    CanvasCamera.prototype.takePicture = function(onsuccess, onerror) {
+        cordova.exec(onsuccess, onerror, "CanvasCamera", "captureImage", []);
     };
 
     var myplugin = new CanvasCamera();
