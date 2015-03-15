@@ -40,7 +40,7 @@ cordova.define("cordova/plugin/CanvasCamera", function(require, exports, module)
                 // rotate 90
                 _this._context.translate(_this._width/2, _this._height/2);
                 _this._context.rotate((90 - window.orientation) *Math.PI/180);
-                _this._context.drawImage(_this._camImage, 0, 0, 352, 288, -_this._width/2, -_this._height/2, _this._width, _this._height);
+                _this._context.drawImage(_this._camImage, 0, 0, 300, 225, -_this._width/2, -_this._height/2, _this._width, _this._height);
                 //
                 _this._context.restore();
             }
@@ -50,7 +50,7 @@ cordova.define("cordova/plugin/CanvasCamera", function(require, exports, module)
                 // rotate 90
                 _this._context.translate(_this._width/2, _this._height/2);
                 _this._context.rotate((90 - window.orientation)*Math.PI/180);
-                _this._context.drawImage(_this._camImage, 0, 0, 352, 288, -_this._height/2, -_this._width/2, _this._height, _this._width);
+                _this._context.drawImage(_this._camImage, 0, 0, 300, 225, -_this._height/2, -_this._width/2, _this._height, _this._width);
                 //
                 _this._context.restore();
             }
@@ -92,17 +92,17 @@ cordova.define("cordova/plugin/CanvasCamera", function(require, exports, module)
                 break;
         }
 
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
+        var windowWidth = this._obj.width;
+        var windowHeight = this._obj.height;
         var pixelRatio = window.devicePixelRatio || 1; /// get pixel ratio of device
 
 
-        this._obj.width = windowWidth;// * pixelRatio;   /// resolution of canvas
-        this._obj.height = windowHeight;// * pixelRatio;
-
-
-        this._obj.style.width = windowWidth + 'px';   /// CSS size of canvas
-        this._obj.style.height = windowHeight + 'px';
+        // this._obj.width = windowWidth;// * pixelRatio;   /// resolution of canvas
+        // this._obj.height = windowHeight;// * pixelRatio;
+        //
+        //
+        // this._obj.style.width = windowWidth + 'px';   /// CSS size of canvas
+        // this._obj.style.height = windowHeight + 'px';
 
 
         this._x = 0;

@@ -513,71 +513,71 @@ typedef enum {
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    @autoreleasepool {
-        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-        CVPixelBufferLockBaseAddress(imageBuffer,0);
-        uint8_t *baseAddress = (uint8_t *)CVPixelBufferGetBaseAddress(imageBuffer);
-        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-        size_t width = CVPixelBufferGetWidth(imageBuffer);
-        size_t height = CVPixelBufferGetHeight(imageBuffer);
-
-        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-        CGContextRef newContext = CGBitmapContextCreate(baseAddress, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-
-        CGImageRef newImage = CGBitmapContextCreateImage(newContext);
-
-        CGContextRelease(newContext);
-        CGColorSpaceRelease(colorSpace);
-
-        UIImage *image = [UIImage imageWithCGImage:newImage];
-
-        // resize image
-        image = [CanvasCamera resizeImage:image toSize:CGSizeMake(352.0, 288.0)];
-
-        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-#if 0
-        //NSString *encodedString = [imageData base64Encoding];
-        NSString *encodedString = [imageData base64EncodedStringWithOptions:0];
-
-        NSString *javascript = @"CanvasCamera.capture('data:image/jpeg;base64,";
-
-        javascript = [NSString stringWithFormat:@"%@%@%@", javascript, encodedString, @"');"];
-
-        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:javascript waitUntilDone:YES];
-#else
-        dispatch_async(dispatch_get_main_queue(), ^{
-            @autoreleasepool {
-
-                // Get a file path to save the JPEG
-                static int i = 0;
-                i++;
-
-                NSString *imagePath = [CanvasCamera getFilePath:[NSString stringWithFormat:@"uuid%d", i] ext:@"jpg"];
-
-                if (i > 10)
-                {
-                    NSString *prevPath = [CanvasCamera getFilePath:[NSString stringWithFormat:@"uuid%d", i-10] ext:@"jpg"];
-                    NSError *error = nil;
-                    [[NSFileManager defaultManager] removeItemAtPath:prevPath error:&error];
-                }
-
-                // Write the data to the file
-                [imageData writeToFile:imagePath atomically:YES];
-
-                imagePath = [NSString stringWithFormat:@"file://%@", imagePath];
-
-                //[retValues setObject:strUrl forKey:kDataKey];
-                //[retValues setObject:imagePath forKey:kDataKey];
-
-                NSString *javascript = [NSString stringWithFormat:@"%@%@%@", @"CanvasCamera.capture('", imagePath, @"');"];
-                [self.webView stringByEvaluatingJavaScriptFromString:javascript];
-            }
-        });
-#endif
-
-        CGImageRelease(newImage);
-        CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-    }
+//    @autoreleasepool {
+//        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+//        CVPixelBufferLockBaseAddress(imageBuffer,0);
+//        uint8_t *baseAddress = (uint8_t *)CVPixelBufferGetBaseAddress(imageBuffer);
+//        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+//        size_t width = CVPixelBufferGetWidth(imageBuffer);
+//        size_t height = CVPixelBufferGetHeight(imageBuffer);
+//
+//        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+//        CGContextRef newContext = CGBitmapContextCreate(baseAddress, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+//
+//        CGImageRef newImage = CGBitmapContextCreateImage(newContext);
+//
+//        CGContextRelease(newContext);
+//        CGColorSpaceRelease(colorSpace);
+//
+//        UIImage *image = [UIImage imageWithCGImage:newImage];
+//
+//        // resize image
+//        image = [CanvasCamera resizeImage:image toSize:CGSizeMake(352.0, 288.0)];
+//
+//        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+//#if 0
+//        //NSString *encodedString = [imageData base64Encoding];
+//        NSString *encodedString = [imageData base64EncodedStringWithOptions:0];
+//
+//        NSString *javascript = @"CanvasCamera.capture('data:image/jpeg;base64,";
+//
+//        javascript = [NSString stringWithFormat:@"%@%@%@", javascript, encodedString, @"');"];
+//
+//        [self.webView performSelectorOnMainThread:@selector(stringByEvaluatingJavaScriptFromString:) withObject:javascript waitUntilDone:YES];
+//#else
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            @autoreleasepool {
+//
+//                // Get a file path to save the JPEG
+//                static int i = 0;
+//                i++;
+//
+//                NSString *imagePath = [CanvasCamera getFilePath:[NSString stringWithFormat:@"uuid%d", i] ext:@"jpg"];
+//
+//                if (i > 10)
+//                {
+//                    NSString *prevPath = [CanvasCamera getFilePath:[NSString stringWithFormat:@"uuid%d", i-10] ext:@"jpg"];
+//                    NSError *error = nil;
+//                    [[NSFileManager defaultManager] removeItemAtPath:prevPath error:&error];
+//                }
+//
+//                // Write the data to the file
+//                [imageData writeToFile:imagePath atomically:YES];
+//
+//                imagePath = [NSString stringWithFormat:@"file://%@", imagePath];
+//
+//                //[retValues setObject:strUrl forKey:kDataKey];
+//                //[retValues setObject:imagePath forKey:kDataKey];
+//
+//                NSString *javascript = [NSString stringWithFormat:@"%@%@%@", @"CanvasCamera.capture('", imagePath, @"');"];
+//                [self.webView stringByEvaluatingJavaScriptFromString:javascript];
+//            }
+//        });
+//#endif
+//
+//        CGImageRelease(newImage);
+//        CVPixelBufferUnlockBaseAddress(imageBuffer,0);
+//    }
 }
 
 #pragma mark - Utilities

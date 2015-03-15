@@ -1,6 +1,14 @@
 CanvasCameraPlugin
 ============================
 
+## NOTE:  This version stripped out the preview to canvas code and fixes the aspect ratio of the images.  I was having issues with the preview when taking pictures quickly (which is what I need to do in my project).
+
+I am using it to take pictures on a timer and then upload to server.  
+
+
+
+
+
 Cordova canvas camera plugin for iOS/Android, supports camera preview and taking photos.
 
 ### Plugin's Purpose
