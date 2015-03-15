@@ -31,5 +31,6 @@
 
 - (void)captureImage:(CDVInvokedUrlCommand *)command;
 
+- (void) removeFileAtPath:(CDVInvokedUrlCommand *)command;
 
 @end

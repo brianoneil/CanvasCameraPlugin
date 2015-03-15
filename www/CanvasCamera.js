@@ -115,6 +115,10 @@ cordova.define("cordova/plugin/CanvasCamera", function(require, exports, module)
         cordova.exec(onsuccess, function(){}, "CanvasCamera", "captureImage", []);
     };
 
+    CanvasCamera.prototype.removeFileAtPath = function(filePath, onSuccess, onError) {
+      cordova.exec(onSuccess, onError, "CanvasCamera", "removeFileAtPath", [filePath]);
+    }
+
     var myplugin = new CanvasCamera();
     module.exports = myplugin;
 });
