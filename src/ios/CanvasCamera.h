@@ -26,6 +26,8 @@
 - (void)startCapture:(CDVInvokedUrlCommand *)command;
 - (void)stopCapture:(CDVInvokedUrlCommand *)command;
 
+- (void)startPreview:(CDVInvokedUrlCommand *)command;
+- (void)stopPreview:(CDVInvokedUrlCommand *)command;
 - (void)setFlashMode:(CDVInvokedUrlCommand *)command;
 - (void)setCameraPosition:(CDVInvokedUrlCommand *)command;
 
